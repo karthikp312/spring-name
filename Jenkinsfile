@@ -1,20 +1,20 @@
 pipeline{
     agent{
-        docker { image 'node:16-alpine'}
+        docker none
     }
     stages{
         stage('BUILD'){
             agent {
-                docker {
-                    image 'maven:3-eclipse-temurin-11'}}
+                docker { image 'maven:3-eclipse-temurin-11' }
+            }
             steps{
                 sh 'mvn clean install -DskipTests'
             }
         }
         stage('TEST'){
             agent {
-                docker {
-                    image 'maven:3-eclipse-temurin-11'}}
+                docker { docker { image 'maven:3-eclipse-temurin-11' }
+            }
             steps{
                 sh 'mvn test'
             }
