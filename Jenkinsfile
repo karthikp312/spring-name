@@ -26,11 +26,19 @@ pipeline{
         }
         stage('PUSH-TO-DOCKER_HUB'){
             steps{
-                sh """
-                 docker login -u "karthik312" -p "Wwwraw312@"
-                 docker push karthik312/spring-name:latest
-                """
+                call()
             }
         }
     }
+}
+
+def call(){
+    withCredentials([usernamePassword(
+            credentialsId: "docker",
+            usernameVariable: "USER",
+            passwordVariable: "PASS"
+    )]) {
+        sh "docker login -u '$USER' -p '$PASS'"
+    }
+        sh "docker push $USER/spring-name:latest"
 }
