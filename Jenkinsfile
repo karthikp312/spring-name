@@ -1,5 +1,5 @@
 pipeline{
-    agent none
+    agent any
     stages{
         stage('BUILD'){
             agent {
@@ -19,14 +19,16 @@ pipeline{
         }
         stage('DOCKER-BUILD'){
             steps{
-                sh 'docker build -t karthik312/spring-name:latest .'
+                sh """
+                 docker build -t karthik312/spring-name:latest .
+                """
             }
         }
         stage('PUSH-TO-DOCKER_HUB'){
             steps{
                 sh """
                  docker login -u "karthik312" -p "Wwwraw312@"
-                 docker image push karthik312/spring-name:latest
+                 docker push karthik312/spring-name:latest
                 """
             }
         }
