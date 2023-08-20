@@ -11,7 +11,7 @@ pipeline{
         }
         stage('TEST'){
             agent {
-                docker { docker { image 'maven:3-eclipse-temurin-11' }
+                docker { image 'maven:3-eclipse-temurin-11' }
             }
             steps{
                 sh 'mvn test'
